@@ -10,6 +10,7 @@ using NFine.Domain.IRepository.SystemManage;
 using NFine.Repository.SystemManage;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NFine.Application.SystemManage
 {
@@ -30,6 +31,20 @@ namespace NFine.Application.SystemManage
             expression = expression.And(t => t.Account != "admin");
             return service.FindList(expression, pagination);
         }
+
+        public List<UserEntity> GetList(string keyword)
+        {
+            var expression = ExtLinq.True<UserEntity>();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                expression = expression.And(t => t.Account.Contains(keyword));
+                expression = expression.Or(t => t.RealName.Contains(keyword));
+                expression = expression.Or(t => t.MobilePhone.Contains(keyword));
+            }
+            expression = expression.And(t => t.Account != "admin");
+            return service.IQueryable(expression).ToList();
+        }
+
         public UserEntity GetForm(string keyValue)
         {
             return service.FindEntity(keyValue);

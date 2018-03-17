@@ -116,6 +116,7 @@
     <Compile Include="App_Start\01 Handler\HandlerLoginAttribute.cs" />
     <Compile Include="App_Start\01 Handler\ControllerBase.cs" />
     <Compile Include="Areas\CustomerManage\Controllers\CustomerController.cs" />
+    <Compile Include="Areas\CustomerManage\Controllers\CustomerTransactionController.cs" />
     <Compile Include="Areas\CustomerManage\CustomerManageAreaRegistration.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\BarCodeController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\PrintController.cs" />
@@ -616,8 +617,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SystemManage\Views\User\Info.cshtml" />
-    <Content Include="Areas\CustomerManage\Views\Custom\Index.cshtml" />
-    <Content Include="Areas\CustomerManage\Views\Custom\Form.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\CustomerTransaction\Index.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\Web.config" />
+    <Content Include="Areas\CustomerManage\Views\Customer\Form.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\CustomerTransaction\Form.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

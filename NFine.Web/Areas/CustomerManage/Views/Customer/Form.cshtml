@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = $.request("keyValue");
+    $(function () {
+        initControl();
+        if (keyValue) {
+            $.ajax({
+                url: "/CustomerManage/Customer/GetFormJson",
+                data: { keyValue: keyValue },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#form1").formSerialize(data);
+                }
+            });
+        }
+    });
+    function initControl() {
+        $("#SalesmanCode").bindSelect({
+            url: "/SystemManage/User/GetSelectJson",
+            id: "Account",
+            text: "RealName"
+        });
+    }
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/CustomerManage/Customer/SubmitForm?keyValue=" + keyValue,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+<form id="form1">
+    <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#">基本信息</a></li>
+            @*<li ><a href="#">扩展信息</a></li>*@
+        </ul>
+        <div style="padding-top: 20px; margin-right: 30px;">
+            <table class="form">
+                <tr>
+                    <th class="formTitle">客户名称</th>
+                    <td class="formValue">
+                        <input id="Name" name="Name" type="text" class="form-control required" placeholder="请输入客户名称" />
+                    </td>
+                    <th class="formTitle">客户电话</th>
+                    <td class="formValue">
+                        <input id="Telphone" name="Telphone" type="text" class="form-control required" placeholder="请输入客户电话" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">
+                        地址
+                    </th>
+                    <td class="formValue" colspan="3">
+                        <input id="Address" name="Address" class="form-control required" placeholder="请输入地址"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">客户来源</th>
+                    <td class="formValue">
+                        <input id="SourceName" name="SourceName" type="text" class="form-control required" placeholder="请输入客户来源" />
+                    </td>
+                    <th class="formTitle">业务员</th>
+                    <td class="formValue">
+                        <select id="SalesmanCode" name="SalesmanCode" class="form-control required">
+                            <option value="">==请选择==</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle" valign="middle">
+                        备注
+                    </th>
+                    <td class="formValue" colspan="3">
+                        <textarea id="Remark" name="Remark" class="form-control" style="height: 60px;"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>

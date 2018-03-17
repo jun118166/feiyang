@@ -9,9 +9,9 @@ using System.Web.Mvc;
 
 namespace NFine.Web.Areas.CustomerManage.Controllers
 {
-    public class CustomerController: ControllerBase
+    public class CustomerTransactionController : ControllerBase
     {
-        private CustomerApp customerApp = new CustomerApp();
+        private CustomerTransactionApp customerTranApp = new CustomerTransactionApp();
 
         [HttpGet]
         [HandlerAjaxOnly]
@@ -19,7 +19,7 @@ namespace NFine.Web.Areas.CustomerManage.Controllers
         {
             var data = new
             {
-                rows = customerApp.GetList(pagination, keyword),
+                rows = customerTranApp.GetList(pagination, keyword),
                 total = pagination.total,
                 page = pagination.page,
                 records = pagination.records
@@ -31,15 +31,15 @@ namespace NFine.Web.Areas.CustomerManage.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)
         {
-            var data = customerApp.GetForm(keyValue);
+            var data = customerTranApp.GetForm(keyValue);
             return Content(data.ToJson());
         }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
-        public ActionResult SubmitForm(CustomerEntity customerEntity, string keyValue)
+        public ActionResult SubmitForm(CustomerTransactionEntity customerEntity, string keyValue)
         {
-            customerApp.SubmitForm(customerEntity, keyValue);
+            customerTranApp.SubmitForm(customerEntity, keyValue);
             return Success("操作成功。");
         }
         [HttpPost]
@@ -48,7 +48,7 @@ namespace NFine.Web.Areas.CustomerManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            customerApp.DeleteForm(keyValue);
+            customerTranApp.DeleteForm(keyValue);
             return Success("删除成功。");
         }
     }

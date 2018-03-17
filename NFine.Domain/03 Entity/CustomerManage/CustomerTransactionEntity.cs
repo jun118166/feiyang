@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NFine.Domain.Entity.CustomerManage
 {
-    public class CustomerEntity : IEntity<CustomerEntity>, ICreationAudited, IDeleteAudited, IModificationAudited
+    public class CustomerTransactionEntity : IEntity<CustomerTransactionEntity>, ICreationAudited, IDeleteAudited, IModificationAudited
     {
         public string Id { get; set; }
         public string CreatorUserId { get; set; }
@@ -16,14 +16,15 @@ namespace NFine.Domain.Entity.CustomerManage
         public DateTime? DeleteTime { get; set; }
         public string LastModifyUserId { get; set; }
         public DateTime? LastModifyTime { get; set; }
-        public string Name { get; set; }
-        public string SourceCode { get; set; }
-        public string SourceName { get; set; }
-        public string Telphone { set; get; }
-        public string Remark { set; get; }
-        public string Version { get; set; }
+        public string CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public string TradStaus { get; set; }
+        public decimal? Price { get; set; }
+        public int Quantity { get; set; }
         public string Salesman { get; set; }
         public string SalesmanCode { get; set; }
-        public string Address { get; set; }
+        public string Remark { get; set; }
+        public int Version { get; set; }
+        public decimal? Total { get; set; }
     }
 }

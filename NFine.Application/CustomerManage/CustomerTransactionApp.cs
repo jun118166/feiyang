@@ -1,30 +1,29 @@
-﻿using NFine.Code;
-using NFine.Domain.Entity.CustomerManage;
-using NFine.Domain.IRepository.CustomerManage;
-using NFine.Repository.CustomerManage;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NFine.Code;
+using NFine.Domain.IRepository.CustomerManage;
+using NFine.Domain.Entity.CustomerManage;
+using NFine.Repository.CustomerManage;
 
 namespace NFine.Application.CustomerManage
 {
-    public class CustomerApp
+    public class CustomerTransactionApp
     {
-        private ICustomerRepository service = new CustomerRepository();
-
-        public List<CustomerEntity> GetList(Pagination pagination, string keyword)
+        private ICustomerTransactionRepository service = new CustomerTransationRepository();
+        public List<CustomerTransactionEntity> GetList(Pagination pagination, string keyword)
         {
-            var expression = ExtLinq.True<CustomerEntity>();
+            var expression = ExtLinq.True<CustomerTransactionEntity>();
             if (!string.IsNullOrEmpty(keyword))
             {
-                expression = expression.And(t => t.Name.Contains(keyword));
-                expression = expression.Or(t => t.Telphone.Contains(keyword));
+                expression = expression.And(t => t.CustomerName.Contains(keyword));
+                expression = expression.Or(t => t.Salesman.Contains(keyword));
             }
             return service.FindList(expression, pagination);
         }
-        public CustomerEntity GetForm(string keyValue)
+        public CustomerTransactionEntity GetForm(string keyValue)
         {
             return service.FindEntity(keyValue);
         }
@@ -32,7 +31,7 @@ namespace NFine.Application.CustomerManage
         {
             service.DeleteForm(keyValue);
         }
-        public void SubmitForm(CustomerEntity customerEntity, string keyValue)
+        public void SubmitForm(CustomerTransactionEntity customerEntity, string keyValue)
         {
             if (!string.IsNullOrEmpty(keyValue))
             {

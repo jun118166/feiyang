@@ -32,6 +32,15 @@ namespace NFine.Web.Areas.SystemManage.Controllers
             };
             return Content(data.ToJson());
         }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetSelectJson(string keyword)
+        {
+            var data = userApp.GetList(keyword);
+            return Content(data.ToJson());
+        }
+
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)

@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NFine.Domain._04_IRepository.CustomerManage
+namespace NFine.Domain.IRepository.CustomerManage
 {
     public interface ICustomerRepository : IRepositoryBase<CustomerEntity>
     {
-
+        void DeleteForm(string keyValue);
+        void SubmitForm(CustomerEntity customerEntity, string keyValue);
     }
 }
