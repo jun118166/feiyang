@@ -12,32 +12,32 @@
             url: "/SystemManage/Role/GetGridJson",
             height: $(window).height() - 96,
             colModel: [
-                { label: "主键", name: "F_Id", hidden: true, key: true },
-                { label: '角色名称', name: 'F_FullName', width: 150, align: 'left' },
-                { label: '角色编号', name: 'F_EnCode', width: 150, align: 'left' },
+                { label: "主键", name: "Id", hidden: true, key: true },
+                { label: '角色名称', name: 'FullName', width: 150, align: 'left' },
+                { label: '角色编号', name: 'EnCode', width: 150, align: 'left' },
                 {
-                    label: '角色类型', name: 'F_Type', width: 80, align: 'left',
+                    label: '角色类型', name: 'Type', width: 80, align: 'left',
                     formatter: function (cellvalue) {
                         return top.clients.dataItems["RoleType"][cellvalue] == undefined ? "" : top.clients.dataItems["RoleType"][cellvalue]
                     }
                 },
                 {
-                    label: '归属机构', name: 'F_OrganizeId', width: 150, align: 'left',
+                    label: '归属机构', name: 'OrganizeId', width: 150, align: 'left',
                     formatter: function (cellvalue, options, rowObject) {
                         return top.clients.organize[cellvalue] == null ? "" : top.clients.organize[cellvalue].fullname;
                     }
                 },
                 {
-                    label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'left',
+                    label: '创建时间', name: 'CreatorTime', width: 80, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
                 },
                 {
-                    label: "有效", name: "F_EnabledMark", width: 60, align: "center",
+                    label: "有效", name: "EnabledMark", width: 60, align: "center",
                     formatter: function (cellvalue) {
                         return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
-                { label: '备注', name: 'F_Description', width: 300, align: 'left' }
+                { label: '备注', name: 'Description', width: 300, align: 'left' }
             ]
         });
         $("#btn_search").click(function () {
@@ -57,7 +57,7 @@
         });
     }
     function btn_edit() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.modalOpen({
             id: "Form",
             title: "修改角色",
@@ -70,14 +70,14 @@
     function btn_delete() {
         $.deleteForm({
             url: "/SystemManage/Role/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            param: { keyValue: $("#gridList").jqGridRowValue().Id },
             success: function () {
                 $.currentWindow().$("#gridList").trigger("reloadGrid");
             }
         })
     }
     function btn_details() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.modalOpen({
             id: "Details",
             title: "查看角色",

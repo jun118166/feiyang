@@ -32,33 +32,33 @@ namespace NFine.Web.Areas.SystemManage.Controllers
             foreach (ModuleEntity item in moduledata)
             {
                 TreeViewModel tree = new TreeViewModel();
-                bool hasChildren = moduledata.Count(t => t.F_ParentId == item.F_Id) == 0 ? false : true;
-                tree.id = item.F_Id;
-                tree.text = item.F_FullName;
-                tree.value = item.F_EnCode;
-                tree.parentId = item.F_ParentId;
+                bool hasChildren = moduledata.Count(t => t.ParentId == item.Id) == 0 ? false : true;
+                tree.id = item.Id;
+                tree.text = item.FullName;
+                tree.value = item.EnCode;
+                tree.parentId = item.ParentId;
                 tree.isexpand = true;
                 tree.complete = true;
                 tree.showcheck = true;
-                tree.checkstate = authorizedata.Count(t => t.F_ItemId == item.F_Id);
+                tree.checkstate = authorizedata.Count(t => t.ItemId == item.Id);
                 tree.hasChildren = true;
-                tree.img = item.F_Icon == "" ? "" : item.F_Icon;
+                tree.img = item.Icon == "" ? "" : item.Icon;
                 treeList.Add(tree);
             }
             foreach (ModuleButtonEntity item in buttondata)
             {
                 TreeViewModel tree = new TreeViewModel();
-                bool hasChildren = buttondata.Count(t => t.F_ParentId == item.F_Id) == 0 ? false : true;
-                tree.id = item.F_Id;
-                tree.text = item.F_FullName;
-                tree.value = item.F_EnCode;
-                tree.parentId = item.F_ParentId == "0" ? item.F_ModuleId : item.F_ParentId;
+                bool hasChildren = buttondata.Count(t => t.ParentId == item.Id) == 0 ? false : true;
+                tree.id = item.Id;
+                tree.text = item.FullName;
+                tree.value = item.EnCode;
+                tree.parentId = item.ParentId == "0" ? item.ModuleId : item.ParentId;
                 tree.isexpand = true;
                 tree.complete = true;
                 tree.showcheck = true;
-                tree.checkstate = authorizedata.Count(t => t.F_ItemId == item.F_Id);
+                tree.checkstate = authorizedata.Count(t => t.ItemId == item.Id);
                 tree.hasChildren = hasChildren;
-                tree.img = item.F_Icon == "" ? "" : item.F_Icon;
+                tree.img = item.Icon == "" ? "" : item.Icon;
                 treeList.Add(tree);
             }
             return Content(treeList.TreeViewJson());

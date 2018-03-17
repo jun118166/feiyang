@@ -14,7 +14,7 @@ namespace NFine.Mapping.SystemManage
         public UserMap()
         {
             this.ToTable("Sys_User");
-            this.HasKey(t => t.F_Id);
+            this.HasKey(t => t.Id);
         }
     }
 }

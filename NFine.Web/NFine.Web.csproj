@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -114,6 +115,8 @@
     <Compile Include="App_Start\01 Handler\HandlerErrorAttribute.cs" />
     <Compile Include="App_Start\01 Handler\HandlerLoginAttribute.cs" />
     <Compile Include="App_Start\01 Handler\ControllerBase.cs" />
+    <Compile Include="Areas\CustomerManage\Controllers\CustomerController.cs" />
+    <Compile Include="Areas\CustomerManage\CustomerManageAreaRegistration.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\BarCodeController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\PrintController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SendMailController.cs" />
@@ -613,6 +616,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SystemManage\Views\User\Info.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\Custom\Index.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\Custom\Form.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

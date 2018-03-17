@@ -19,8 +19,8 @@
         });
     });
     function initControl() {
-        $("#F_CategoryId").select2({ minimumResultsForSearch: -1 })
-        $("#F_ParentId").bindSelect({
+        $("#CategoryId").select2({ minimumResultsForSearch: -1 })
+        $("#ParentId").bindSelect({
             url: "/SystemManage/Organize/GetTreeSelectJson",
         });
     }
@@ -36,13 +36,13 @@
                 <tr>
                     <th class="formTitle">上级</th>
                     <td class="formValue">
-                        <select id="F_ParentId" name="F_ParentId" class="form-control">
+                        <select id="ParentId" name="ParentId" class="form-control">
                             <option value="0">父节点</option>
                         </select>
                     </td>
                     <th class="formTitle">类型</th>
                     <td class="formValue">
-                        <select id="F_CategoryId" name="F_Target" class="form-control">
+                        <select id="CategoryId" name="Target" class="form-control">
                             <option value="">==请选择==</option>
                             <option value="Group">集团</option>
                             <option value="Company">公司</option>
@@ -54,56 +54,56 @@
                 <tr>
                     <th class="formTitle">名称</th>
                     <td class="formValue">
-                        <input id="F_FullName" name="F_FullName" type="text" class="form-control" />
+                        <input id="FullName" name="FullName" type="text" class="form-control" />
                     </td>
                     <th class="formTitle">编号</th>
                     <td class="formValue">
-                        <input id="F_EnCode" name="F_EnCode" type="text" class="form-control"/>
+                        <input id="EnCode" name="EnCode" type="text" class="form-control"/>
                     </td>
                 </tr>
                 <tr>
                 <tr>
                     <th class="formTitle">负责人</th>
                     <td class="formValue">
-                        <input id="F_ManagerId" name="F_ManagerId" type="text" class="form-control" />
+                        <input id="ManagerId" name="ManagerId" type="text" class="form-control" />
                     </td>
                     <th class="formTitle">手机</th>
                     <td class="formValue">
-                        <input id="F_MobilePhone" name="F_MobilePhone" type="text" class="form-control" />
+                        <input id="MobilePhone" name="MobilePhone" type="text" class="form-control" />
                     </td>
                 </tr>
                 <tr>
                     <th class="formTitle">微信</th>
                     <td class="formValue">
-                        <input id="F_WeChat" name="F_ManagerId" type="text" class="form-control" />
+                        <input id="WeChat" name="ManagerId" type="text" class="form-control" />
                     </td>
                     <th class="formTitle">电话</th>
                     <td class="formValue">
-                        <input id="F_TelePhone" name="F_TelePhone" type="text" class="form-control" />
+                        <input id="TelePhone" name="TelePhone" type="text" class="form-control" />
                     </td>
                 </tr>
                 <tr>
 
                     <th class="formTitle">邮箱</th>
                     <td class="formValue">
-                        <input id="F_Email" name="F_MobilePhone" type="text" class="form-control" />
+                        <input id="Email" name="MobilePhone" type="text" class="form-control" />
                     </td>
                     <th class="formTitle">传真</th>
                     <td class="formValue">
-                        <input id="F_Fax" name="F_MobilePhone" type="text" class="form-control" />
+                        <input id="Fax" name="MobilePhone" type="text" class="form-control" />
                     </td>
                 </tr>
                 <tr>
                     <th class="formTitle">地址</th>
                     <td class="formValue" colspan="3">
-                        <input id="F_Address" name="F_Address" type="text" class="form-control" />
+                        <input id="Address" name="Address" type="text" class="form-control" />
                     </td>
                 </tr>
                 <tr>
                     <th class="formTitle" style="height: 35px;">选项</th>
                     <td class="formValue" colspan="3" style="padding-top: 1px;">
                         <div class="ckbox">
-                            <input id="F_EnabledMark" name="F_EnabledMark" type="checkbox" checked="checked"><label for="F_EnabledMark">有效</label>
+                            <input id="EnabledMark" name="EnabledMark" type="checkbox" checked="checked"><label for="EnabledMark">有效</label>
                         </div>
                     </td>
                 </tr>
@@ -111,27 +111,27 @@
                     <th class="formTitle" valign="top" style="padding-top: 5px;">备注
                     </th>
                     <td class="formValue" colspan="3">
-                        <textarea id="F_Description" name="F_Descriptions" class="form-control" style="height: 60px;"></textarea>
+                        <textarea id="Description" name="Descriptions" class="form-control" style="height: 60px;"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <th class="formTitle">创建人员</th>
                     <td class="formValue">
-                        <input id="F_CreatorUserId" name="F_CreatorUserId" type="text" class="form-control" />
+                        <input id="CreatorUserId" name="CreatorUserId" type="text" class="form-control" />
                     </td>
                     <th class="formTitle">创建时间</th>
                     <td class="formValue">
-                        <input id="F_CreatorTime" name="F_CreatorTime" type="text" class="form-control" />
+                        <input id="CreatorTime" name="CreatorTime" type="text" class="form-control" />
                     </td>
                 </tr>
                 <tr>
                     <th class="formTitle">修改人员</th>
                     <td class="formValue">
-                        <input id="F_LastModifyUserId" name="F_LastModifyUserId" type="text" class="form-control" />
+                        <input id="LastModifyUserId" name="LastModifyUserId" type="text" class="form-control" />
                     </td>
                     <th class="formTitle">修改时间</th>
                     <td class="formValue">
-                        <input id="F_LastModifyTime" name="F_LastModifyTime" type="text" class="form-control" />
+                        <input id="LastModifyTime" name="LastModifyTime" type="text" class="form-control" />
                     </td>
                 </tr>
             </table>

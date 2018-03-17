@@ -77,8 +77,8 @@ namespace NFine.Web.Areas.SystemManage.Controllers
         public ActionResult DisabledAccount(string keyValue)
         {
             UserEntity userEntity = new UserEntity();
-            userEntity.F_Id = keyValue;
-            userEntity.F_EnabledMark = false;
+            userEntity.Id = keyValue;
+            userEntity.EnabledMark = false;
             userApp.UpdateForm(userEntity);
             return Success("账户禁用成功。");
         }
@@ -89,8 +89,8 @@ namespace NFine.Web.Areas.SystemManage.Controllers
         public ActionResult EnabledAccount(string keyValue)
         {
             UserEntity userEntity = new UserEntity();
-            userEntity.F_Id = keyValue;
-            userEntity.F_EnabledMark = true;
+            userEntity.Id = keyValue;
+            userEntity.EnabledMark = true;
             userApp.UpdateForm(userEntity);
             return Success("账户启用成功。");
         }

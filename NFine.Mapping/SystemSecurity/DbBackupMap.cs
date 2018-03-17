@@ -14,7 +14,7 @@ namespace NFine.Mapping.SystemSecurity
         public DbBackupMap()
         {
             this.ToTable("Sys_DbBackup");
-            this.HasKey(t => t.F_Id);
+            this.HasKey(t => t.Id);
         }
     }
 }

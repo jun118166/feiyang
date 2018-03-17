@@ -12,9 +12,9 @@
             url: "/SystemSecurity/FilterIP/GetGridJson",
             height: $(window).height() - 96,
             colModel: [
-                { label: "主键", name: "F_Id", hidden: true, key: true },
+                { label: "主键", name: "Id", hidden: true, key: true },
                 {
-                    label: '策略类型', name: 'F_Type', width: 80, align: 'left',
+                    label: '策略类型', name: 'Type', width: 80, align: 'left',
                     formatter: function (cellvalue, options, rowObject) {
                         if (cellvalue == true) {
                             return '<span class=\"label label-success\">允许访问</span>';
@@ -23,14 +23,14 @@
                         }
                     }
                 },
-                { label: '起始IP', name: 'F_StartIP', width: 200, align: 'left' },
-                { label: '结束IP', name: 'F_EndIP', width: 200, align: 'left' },
-                { label: '创建人员', name: 'F_CreatorUserId', width: 100, align: 'left' },
+                { label: '起始IP', name: 'StartIP', width: 200, align: 'left' },
+                { label: '结束IP', name: 'EndIP', width: 200, align: 'left' },
+                { label: '创建人员', name: 'CreatorUserId', width: 100, align: 'left' },
                 {
-                    label: '创建时间', name: 'F_CreatorTime', width: 100, align: 'left',
+                    label: '创建时间', name: 'CreatorTime', width: 100, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d H:i', newformat: 'Y-m-d H:i' }
                 },
-                { label: '备注', name: 'F_Description', width: 300, align: 'left' }
+                { label: '备注', name: 'Description', width: 300, align: 'left' }
             ]
         });
         $("#btn_search").click(function () {
@@ -54,14 +54,14 @@
     function btn_delete() {
         $.deleteForm({
             url: "/SystemSecurity/FilterIP/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            param: { keyValue: $("#gridList").jqGridRowValue().Id },
             success: function () {
                 $.currentWindow().$("#gridList").trigger("reloadGrid");
             }
         })
     }
     function btn_details() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.modalOpen({
             id: "Details",
             title: "查看策略",

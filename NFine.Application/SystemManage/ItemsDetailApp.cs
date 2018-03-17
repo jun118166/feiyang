@@ -22,14 +22,14 @@ namespace NFine.Application.SystemManage
             var expression = ExtLinq.True<ItemsDetailEntity>();
             if (!string.IsNullOrEmpty(itemId))
             {
-                expression = expression.And(t => t.F_ItemId == itemId);
+                expression = expression.And(t => t.ItemId == itemId);
             }
             if (!string.IsNullOrEmpty(keyword))
             {
-                expression = expression.And(t => t.F_ItemName.Contains(keyword));
-                expression = expression.Or(t => t.F_ItemCode.Contains(keyword));
+                expression = expression.And(t => t.ItemName.Contains(keyword));
+                expression = expression.Or(t => t.ItemCode.Contains(keyword));
             }
-            return service.IQueryable(expression).OrderBy(t => t.F_SortCode).ToList();
+            return service.IQueryable(expression).OrderBy(t => t.SortCode).ToList();
         }
         public List<ItemsDetailEntity> GetItemList(string enCode)
         {
@@ -41,7 +41,7 @@ namespace NFine.Application.SystemManage
         }
         public void DeleteForm(string keyValue)
         {
-            service.Delete(t => t.F_Id == keyValue);
+            service.Delete(t => t.Id == keyValue);
         }
         public void SubmitForm(ItemsDetailEntity itemsDetailEntity, string keyValue)
         {

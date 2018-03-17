@@ -12,30 +12,30 @@
             url: "/SystemSecurity/Log/GetGridJson",
             height: $(window).height() - 128,
             colModel: [
-                { label: '主键', name: 'F_Id', hidden: true },
+                { label: '主键', name: 'Id', hidden: true },
                 {
-                    label: '日期', name: 'F_Date', width: 120, align: 'left',
+                    label: '日期', name: 'Date', width: 120, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s' }
                 },
-                { label: '账户', name: 'F_Account', width: 80, align: 'left' },
-                { label: '姓名', name: 'F_NickName', width: 80, align: 'left' },
-                { label: '操作菜单', name: 'F_ModuleName', width: 100, align: 'left' },
+                { label: '账户', name: 'Account', width: 80, align: 'left' },
+                { label: '姓名', name: 'NickName', width: 80, align: 'left' },
+                { label: '操作菜单', name: 'ModuleName', width: 100, align: 'left' },
                 {
-                    label: '操作类型', name: 'F_Type', width: 80, align: 'left',
+                    label: '操作类型', name: 'Type', width: 80, align: 'left',
                     formatter: function (cellvalue) {
                         return top.clients.dataItems["DbLogType"][cellvalue] == undefined ? "" : top.clients.dataItems["DbLogType"][cellvalue]
                     }
                 },
                 {
-                    label: 'IP地址', name: 'F_IPAddress', width: 230, align: 'left',
+                    label: 'IP地址', name: 'IPAddress', width: 230, align: 'left',
                     formatter: function (cellvalue, options, rowObject) {
-                        return cellvalue + ";" + rowObject.F_IPAddressName;
+                        return cellvalue + ";" + rowObject.IPAddressName;
                     }
                 },
-                { label: '日志内容', name: 'F_Description', width: 300, align: 'left' }
+                { label: '日志内容', name: 'Description', width: 300, align: 'left' }
             ],
             pager: "#gridPager",
-            sortname: 'F_Date desc',
+            sortname: 'Date desc',
             viewrecords: true
         });
         $("#time_horizon a.btn-default").click(function () {

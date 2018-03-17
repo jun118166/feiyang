@@ -22,11 +22,11 @@ namespace NFine.Application.SystemManage
             var expression = ExtLinq.True<RoleEntity>();
             if (!string.IsNullOrEmpty(keyword))
             {
-                expression = expression.And(t => t.F_FullName.Contains(keyword));
-                expression = expression.Or(t => t.F_EnCode.Contains(keyword));
+                expression = expression.And(t => t.FullName.Contains(keyword));
+                expression = expression.Or(t => t.EnCode.Contains(keyword));
             }
-            expression = expression.And(t => t.F_Category == 2);
-            return service.IQueryable(expression).OrderBy(t => t.F_SortCode).ToList();
+            expression = expression.And(t => t.Category == 2);
+            return service.IQueryable(expression).OrderBy(t => t.SortCode).ToList();
         }
         public RoleEntity GetForm(string keyValue)
         {
@@ -34,7 +34,7 @@ namespace NFine.Application.SystemManage
         }
         public void DeleteForm(string keyValue)
         {
-            service.Delete(t => t.F_Id == keyValue);
+            service.Delete(t => t.Id == keyValue);
         }
         public void SubmitForm(RoleEntity roleEntity, string keyValue)
         {
@@ -46,7 +46,7 @@ namespace NFine.Application.SystemManage
             else
             {
                 roleEntity.Create();
-                roleEntity.F_Category = 2;
+                roleEntity.Category = 2;
                 service.Insert(roleEntity);
             }
         }

@@ -14,7 +14,7 @@ namespace NFine.Mapping.SystemManage
         public ItemsMap()
         {
             this.ToTable("Sys_Items");
-            this.HasKey(t => t.F_Id);
+            this.HasKey(t => t.Id);
         }
     }
 }

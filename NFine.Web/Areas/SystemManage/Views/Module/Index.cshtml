@@ -11,15 +11,15 @@
         $gridList.dataGrid({
             treeGrid: true,
             treeGridModel: "adjacency",
-            ExpandColumn: "F_UrlAddress",
+            ExpandColumn: "UrlAddress",
             url: "/SystemManage/Module/GetTreeGridJson",
             height: $(window).height() - 96,
             colModel: [
-                { label: "主键", name: "F_Id", hidden: true, key: true },
-                { label: '名称', name: 'F_FullName', width: 200, align: 'left' },
-                { label: '连接', name: 'F_UrlAddress', width: 260, align: 'left' },
+                { label: "主键", name: "Id", hidden: true, key: true },
+                { label: '名称', name: 'FullName', width: 200, align: 'left' },
+                { label: '连接', name: 'UrlAddress', width: 260, align: 'left' },
                 {
-                    label: '目标', name: 'F_Target', width: 80, align: 'center',
+                    label: '目标', name: 'Target', width: 80, align: 'center',
                     formatter: function (cellvalue) {
                         if (cellvalue == "expand") {
                             return "无页面";
@@ -33,30 +33,30 @@
                     }
                 },
                 {
-                    label: "菜单", name: "F_IsMenu", width: 60, align: "center",
+                    label: "菜单", name: "IsMenu", width: 60, align: "center",
                     formatter: function (cellvalue) {
                         return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
                 {
-                    label: "展开", name: "F_IsExpand", width: 60, align: "center",
+                    label: "展开", name: "IsExpand", width: 60, align: "center",
                     formatter: function (cellvalue) {
                         return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
                 {
-                    label: "公共", name: "F_IsPublic", width: 60, align: "center",
+                    label: "公共", name: "IsPublic", width: 60, align: "center",
                     formatter: function (cellvalue) {
                         return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
                 {
-                    label: "有效", name: "F_EnabledMark", width: 60, align: "center",
+                    label: "有效", name: "EnabledMark", width: 60, align: "center",
                     formatter: function (cellvalue) {
                         return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
-                { label: '介绍', name: 'F_Description', width: 300, align: 'left' }
+                { label: '介绍', name: 'Description', width: 300, align: 'left' }
             ]
         });
         $("#btn_search").click(function () {
@@ -78,7 +78,7 @@
         });
     }
     function btn_edit() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.modalOpen({
             id: "Form",
             title: "修改菜单",
@@ -93,7 +93,7 @@
     function btn_delete() {
         $.deleteForm({
             url: "/SystemManage/Module/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            param: { keyValue: $("#gridList").jqGridRowValue().Id },
             success: function () {
                 $.currentWindow().$("#gridList").resetSelection();
                 $.currentWindow().$("#gridList").trigger("reloadGrid");
@@ -101,7 +101,7 @@
         })
     }
     function btn_details() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.modalOpen({
             id: "Details",
             title: "查看菜单",
@@ -112,7 +112,7 @@
         });
     }
     function btn_modulebutton() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.modalOpen({
             id: "modulebutton",
             title: "系统按钮",

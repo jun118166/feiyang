@@ -26,9 +26,9 @@ namespace NFine.Web.Areas.SystemManage.Controllers
             foreach (ModuleEntity item in data)
             {
                 TreeSelectModel treeModel = new TreeSelectModel();
-                treeModel.id = item.F_Id;
-                treeModel.text = item.F_FullName;
-                treeModel.parentId = item.F_ParentId;
+                treeModel.id = item.Id;
+                treeModel.text = item.FullName;
+                treeModel.parentId = item.ParentId;
                 treeList.Add(treeModel);
             }
             return Content(treeList.TreeSelectJson());
@@ -40,16 +40,16 @@ namespace NFine.Web.Areas.SystemManage.Controllers
             var data = moduleApp.GetList();
             if (!string.IsNullOrEmpty(keyword))
             {
-                data = data.TreeWhere(t => t.F_FullName.Contains(keyword));
+                data = data.TreeWhere(t => t.FullName.Contains(keyword));
             }
             var treeList = new List<TreeGridModel>();
             foreach (ModuleEntity item in data)
             {
                 TreeGridModel treeModel = new TreeGridModel();
-                bool hasChildren = data.Count(t => t.F_ParentId == item.F_Id) == 0 ? false : true;
-                treeModel.id = item.F_Id;
+                bool hasChildren = data.Count(t => t.ParentId == item.Id) == 0 ? false : true;
+                treeModel.id = item.Id;
                 treeModel.isLeaf = hasChildren;
-                treeModel.parentId = item.F_ParentId;
+                treeModel.parentId = item.ParentId;
                 treeModel.expanded = hasChildren;
                 treeModel.entityJson = item.ToJson();
                 treeList.Add(treeModel);

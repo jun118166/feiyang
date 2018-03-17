@@ -14,7 +14,7 @@ namespace NFine.Mapping.SystemManage
         public OrganizeMap()
         {
             this.ToTable("Sys_Organize");
-            this.HasKey(t => t.F_Id);
+            this.HasKey(t => t.Id);
         }
     }
 }

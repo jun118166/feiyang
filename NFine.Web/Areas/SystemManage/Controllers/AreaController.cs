@@ -26,9 +26,9 @@ namespace NFine.Web.Areas.SystemManage.Controllers
             foreach (AreaEntity item in data)
             {
                 TreeSelectModel treeModel = new TreeSelectModel();
-                treeModel.id = item.F_Id;
-                treeModel.text = item.F_FullName;
-                treeModel.parentId = item.F_ParentId;
+                treeModel.id = item.Id;
+                treeModel.text = item.FullName;
+                treeModel.parentId = item.ParentId;
                 treeList.Add(treeModel);
             }
             return Content(treeList.TreeSelectJson());
@@ -42,11 +42,11 @@ namespace NFine.Web.Areas.SystemManage.Controllers
             foreach (AreaEntity item in data)
             {
                 TreeGridModel treeModel = new TreeGridModel();
-                bool hasChildren = data.Count(t => t.F_ParentId == item.F_Id) == 0 ? false : true;
-                treeModel.id = item.F_Id;
-                treeModel.text = item.F_FullName;
+                bool hasChildren = data.Count(t => t.ParentId == item.Id) == 0 ? false : true;
+                treeModel.id = item.Id;
+                treeModel.text = item.FullName;
                 treeModel.isLeaf = hasChildren;
-                treeModel.parentId = item.F_ParentId;
+                treeModel.parentId = item.ParentId;
                 treeModel.expanded = true;
                 treeModel.entityJson = item.ToJson();
                 treeList.Add(treeModel);

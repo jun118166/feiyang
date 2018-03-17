@@ -11,14 +11,14 @@
         $("#gridList").dataGrid({
             treeGrid: true,
             treeGridModel: "adjacency",
-            ExpandColumn: "F_Location",
+            ExpandColumn: "Location",
             url: "/SystemManage/ModuleButton/GetTreeGridJson?moduleId=" + moduleId,
             height: $(window).height() - 90,
             colModel: [
-                { label: "主键", name: "F_Id", hidden: true, key: true },
-                { label: '名称', name: 'F_FullName', width: 150, align: 'left' },
+                { label: "主键", name: "Id", hidden: true, key: true },
+                { label: '名称', name: 'FullName', width: 150, align: 'left' },
                 {
-                    label: '位置', name: 'F_Location', width: 80, align: 'left',
+                    label: '位置', name: 'Location', width: 80, align: 'left',
                     formatter: function (cellvalue) {
                         if (cellvalue == 1) {
                             return "初始";
@@ -27,22 +27,22 @@
                         }
                     }
                 },
-                { label: '事件', name: 'F_JsEvent', width: 150, align: 'left' },
-                { label: '连接', name: 'F_UrlAddress', width: 270, align: 'left' },
+                { label: '事件', name: 'JsEvent', width: 150, align: 'left' },
+                { label: '连接', name: 'UrlAddress', width: 270, align: 'left' },
                 {
-                    label: "分开", name: "F_Split", width: 60, align: "center",
+                    label: "分开", name: "Split", width: 60, align: "center",
                     formatter: function (cellvalue) {
                         return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
                 {
-                    label: "公共", name: "F_IsPublic", width: 60, align: "center",
+                    label: "公共", name: "IsPublic", width: 60, align: "center",
                     formatter: function (cellvalue) {
                         return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
                 {
-                    label: "有效", name: "F_EnabledMark", width: 60, align: "center", autowidth: false,
+                    label: "有效", name: "EnabledMark", width: 60, align: "center", autowidth: false,
                     formatter: function (cellvalue) {
                         return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
@@ -63,7 +63,7 @@
         });
     }
     function btn_edit() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.modalOpen({
             id: "Form",
             title: "修改按钮",
@@ -78,7 +78,7 @@
     function btn_delete() {
         $.deleteForm({
             url: "/SystemManage/ModuleButton/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            param: { keyValue: $("#gridList").jqGridRowValue().Id },
             success: function () {
                 $("#gridList").resetSelection();
                 $("#gridList").trigger("reloadGrid");
@@ -86,7 +86,7 @@
         })
     }
     function btn_details() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.modalOpen({
             id: "Details",
             title: "查看按钮",

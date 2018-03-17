@@ -23,7 +23,7 @@
             return false;
         }
         var postData = $("#form1").formSerialize();
-        postData["F_ItemId"] = itemId;
+        postData["ItemId"] = itemId;
         $.submitForm({
             url: "/SystemManage/ItemsData/SubmitForm?keyValue=" + keyValue,
             param: postData,
@@ -40,29 +40,29 @@
             <tr>
                 <th class="formTitle">名称</th>
                 <td class="formValue">
-                    <input id="F_ItemName" name="F_ItemName" type="text" class="form-control required" placeholder="请输入名称" />
+                    <input id="ItemName" name="ItemName" type="text" class="form-control required" placeholder="请输入名称" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle">编号</th>
                 <td class="formValue">
-                    <input id="F_ItemCode" name="F_ItemCode" type="text" class="form-control required" placeholder="请输入编号" />
+                    <input id="ItemCode" name="ItemCode" type="text" class="form-control required" placeholder="请输入编号" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle">排序</th>
                 <td class="formValue">
-                    <input id="F_SortCode" name="F_SortCode" type="text" class="form-control required" />
+                    <input id="SortCode" name="SortCode" type="text" class="form-control required" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle" style="height: 35px;">选项</th>
                 <td class="formValue" style="padding-top: 1px;">
                     <div class="ckbox">
-                        <input id="F_IsDefault" name="F_IsDefault" type="checkbox"><label for="F_IsDefault">默认</label>
+                        <input id="IsDefault" name="IsDefault" type="checkbox"><label for="IsDefault">默认</label>
                     </div>
                     <div class="ckbox">
-                        <input id="F_EnabledMark" name="F_EnabledMark" type="checkbox" checked="checked"><label for="F_EnabledMark">有效</label>
+                        <input id="EnabledMark" name="EnabledMark" type="checkbox" checked="checked"><label for="EnabledMark">有效</label>
                     </div>
                 </td>
             </tr>
@@ -70,7 +70,7 @@
                 <th class="formTitle" valign="top" style="padding-top: 5px;">备注
                 </th>
                 <td class="formValue">
-                    <textarea id="F_Description" name="F_Description" class="form-control" style="height: 60px;"></textarea>
+                    <textarea id="Description" name="Description" class="form-control" style="height: 60px;"></textarea>
                 </td>
             </tr>
         </table>

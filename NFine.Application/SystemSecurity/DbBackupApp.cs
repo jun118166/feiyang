@@ -29,14 +29,14 @@ namespace NFine.Application.SystemSecurity
                 switch (condition)
                 {
                     case "DbName":  
-                        expression = expression.And(t => t.F_DbName.Contains(keyword));
+                        expression = expression.And(t => t.DbName.Contains(keyword));
                         break;
                     case "FileName":
-                        expression = expression.And(t => t.F_FileName.Contains(keyword));
+                        expression = expression.And(t => t.FileName.Contains(keyword));
                         break;
                 }
             }
-            return service.IQueryable(expression).OrderByDescending(t => t.F_BackupTime).ToList();
+            return service.IQueryable(expression).OrderByDescending(t => t.BackupTime).ToList();
         }
         public DbBackupEntity GetForm(string keyValue)
         {
@@ -48,9 +48,9 @@ namespace NFine.Application.SystemSecurity
         }
         public void SubmitForm(DbBackupEntity dbBackupEntity)
         {
-            dbBackupEntity.F_Id = Common.GuId();
-            dbBackupEntity.F_EnabledMark = true;
-            dbBackupEntity.F_BackupTime = DateTime.Now;
+            dbBackupEntity.Id = Common.GuId();
+            dbBackupEntity.EnabledMark = true;
+            dbBackupEntity.BackupTime = DateTime.Now;
             service.ExecuteDbBackup(dbBackupEntity);
         }
     }

@@ -23,9 +23,9 @@ namespace NFine.Application.SystemManage
             var expression = ExtLinq.True<ModuleButtonEntity>();
             if (!string.IsNullOrEmpty(moduleId))
             {
-                expression = expression.And(t => t.F_ModuleId == moduleId);
+                expression = expression.And(t => t.ModuleId == moduleId);
             }
-            return service.IQueryable(expression).OrderBy(t => t.F_SortCode).ToList();
+            return service.IQueryable(expression).OrderBy(t => t.SortCode).ToList();
         }
         public ModuleButtonEntity GetForm(string keyValue)
         {
@@ -33,13 +33,13 @@ namespace NFine.Application.SystemManage
         }
         public void DeleteForm(string keyValue)
         {
-            if (service.IQueryable().Count(t => t.F_ParentId.Equals(keyValue)) > 0)
+            if (service.IQueryable().Count(t => t.ParentId.Equals(keyValue)) > 0)
             {
                 throw new Exception("删除失败！操作的对象包含了下级数据。");
             }
             else
             {
-                service.Delete(t => t.F_Id == keyValue);
+                service.Delete(t => t.Id == keyValue);
             }
         }
         public void SubmitForm(ModuleButtonEntity moduleButtonEntity, string keyValue)
@@ -62,9 +62,9 @@ namespace NFine.Application.SystemManage
             List<ModuleButtonEntity> entitys = new List<ModuleButtonEntity>();
             foreach (string item in ArrayId)
             {
-                ModuleButtonEntity moduleButtonEntity = data.Find(t => t.F_Id == item);
-                moduleButtonEntity.F_Id = Common.GuId();
-                moduleButtonEntity.F_ModuleId = moduleId;
+                ModuleButtonEntity moduleButtonEntity = data.Find(t => t.Id == item);
+                moduleButtonEntity.Id = Common.GuId();
+                moduleButtonEntity.ModuleId = moduleId;
                 entitys.Add(moduleButtonEntity);
             }
             service.SubmitCloneButton(entitys);

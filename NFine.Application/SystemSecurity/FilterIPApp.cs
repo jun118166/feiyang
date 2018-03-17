@@ -22,9 +22,9 @@ namespace NFine.Application.SystemSecurity
             var expression = ExtLinq.True<FilterIPEntity>();
             if (!string.IsNullOrEmpty(keyword))
             {
-                expression = expression.And(t => t.F_StartIP.Contains(keyword));
+                expression = expression.And(t => t.StartIP.Contains(keyword));
             }
-            return service.IQueryable(expression).OrderByDescending(t => t.F_DeleteTime).ToList();
+            return service.IQueryable(expression).OrderByDescending(t => t.DeleteTime).ToList();
         }
         public FilterIPEntity GetForm(string keyValue)
         {
@@ -32,7 +32,7 @@ namespace NFine.Application.SystemSecurity
         }
         public void DeleteForm(string keyValue)
         {
-            service.Delete(t => t.F_Id == keyValue);
+            service.Delete(t => t.Id == keyValue);
         }
         public void SubmitForm(FilterIPEntity filterIPEntity, string keyValue)
         {

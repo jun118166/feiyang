@@ -18,8 +18,8 @@ namespace NFine.Repository.SystemManage
         {
             using (var db = new RepositoryBase().BeginTrans())
             {
-                db.Delete<UserEntity>(t => t.F_Id == keyValue);
-                db.Delete<UserLogOnEntity>(t => t.F_UserId == keyValue);
+                db.Delete<UserEntity>(t => t.Id == keyValue);
+                db.Delete<UserLogOnEntity>(t => t.UserId == keyValue);
                 db.Commit();
             }
         }
@@ -33,10 +33,10 @@ namespace NFine.Repository.SystemManage
                 }
                 else
                 {
-                    userLogOnEntity.F_Id = userEntity.F_Id;
-                    userLogOnEntity.F_UserId = userEntity.F_Id;
-                    userLogOnEntity.F_UserSecretkey = Md5.md5(Common.CreateNo(), 16).ToLower();
-                    userLogOnEntity.F_UserPassword = Md5.md5(DESEncrypt.Encrypt(Md5.md5(userLogOnEntity.F_UserPassword, 32).ToLower(), userLogOnEntity.F_UserSecretkey).ToLower(), 32).ToLower();
+                    userLogOnEntity.Id = userEntity.Id;
+                    userLogOnEntity.UserId = userEntity.Id;
+                    userLogOnEntity.UserSecretkey = Md5.md5(Common.CreateNo(), 16).ToLower();
+                    userLogOnEntity.UserPassword = Md5.md5(DESEncrypt.Encrypt(Md5.md5(userLogOnEntity.UserPassword, 32).ToLower(), userLogOnEntity.UserSecretkey).ToLower(), 32).ToLower();
                     db.Insert(userEntity);
                     db.Insert(userLogOnEntity);
                 }

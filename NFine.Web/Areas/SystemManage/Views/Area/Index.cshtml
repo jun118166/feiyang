@@ -11,23 +11,23 @@
         $gridList.dataGrid({
             treeGrid: true,
             treeGridModel: "adjacency",
-            ExpandColumn: "F_CreatorTime",
+            ExpandColumn: "CreatorTime",
             url: "/SystemManage/Area/GetTreeGridJson",
             height: $(window).height() - 96,
             colModel: [
-                { label: "主键", name: "F_Id", hidden: true, key: true },
-                { label: '名称', name: 'F_FullName', width: 200, align: 'left' },
+                { label: "主键", name: "Id", hidden: true, key: true },
+                { label: '名称', name: 'FullName', width: 200, align: 'left' },
                 {
-                    label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'left',
+                    label: '创建时间', name: 'CreatorTime', width: 80, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
                 },
                 {
-                    label: "有效", name: "F_EnabledMark", width: 60, align: "center",
+                    label: "有效", name: "EnabledMark", width: 60, align: "center",
                     formatter: function (cellvalue) {
                         return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
-                { label: '备注', name: 'F_Description', width: 300, align: 'left' }
+                { label: '备注', name: 'Description', width: 300, align: 'left' }
             ]
         });
         $("#btn_search").click(function () {
@@ -49,7 +49,7 @@
         });
     }
     function btn_edit() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.modalOpen({
             id: "Form",
             title: "修改区域",
@@ -64,7 +64,7 @@
     function btn_delete() {
         $.deleteForm({
             url: "/SystemManage/Area/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            param: { keyValue: $("#gridList").jqGridRowValue().Id },
             success: function () {
                 $.currentWindow().$("#gridList").resetSelection();
                 $.currentWindow().$("#gridList").trigger("reloadGrid");

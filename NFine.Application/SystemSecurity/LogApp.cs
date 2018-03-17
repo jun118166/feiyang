@@ -24,7 +24,7 @@ namespace NFine.Application.SystemSecurity
             if (!queryParam["keyword"].IsEmpty())
             {
                 string keyword = queryParam["keyword"].ToString();
-                expression = expression.And(t => t.F_Account.Contains(keyword));
+                expression = expression.And(t => t.Account.Contains(keyword));
             }
             if (!queryParam["timeType"].IsEmpty())
             {
@@ -47,7 +47,7 @@ namespace NFine.Application.SystemSecurity
                     default:
                         break;
                 }
-                expression = expression.And(t => t.F_Date >= startTime && t.F_Date <= endTime);
+                expression = expression.And(t => t.Date >= startTime && t.Date <= endTime);
             }
             return service.FindList(expression, pagination);
         }
@@ -67,29 +67,29 @@ namespace NFine.Application.SystemSecurity
                 operateTime = DateTime.Now.AddMonths(-3);
             }
             var expression = ExtLinq.True<LogEntity>();
-            expression = expression.And(t => t.F_Date <= operateTime);
+            expression = expression.And(t => t.Date <= operateTime);
             service.Delete(expression);
         }
         public void WriteDbLog(bool result, string resultLog)
         {
             LogEntity logEntity = new LogEntity();
-            logEntity.F_Id = Common.GuId();
-            logEntity.F_Date = DateTime.Now;
-            logEntity.F_Account = OperatorProvider.Provider.GetCurrent().UserCode;
-            logEntity.F_NickName = OperatorProvider.Provider.GetCurrent().UserName;
-            logEntity.F_IPAddress = Net.Ip;
-            logEntity.F_IPAddressName = Net.GetLocation(logEntity.F_IPAddress);
-            logEntity.F_Result = result;
-            logEntity.F_Description = resultLog;
+            logEntity.Id = Common.GuId();
+            logEntity.Date = DateTime.Now;
+            logEntity.Account = OperatorProvider.Provider.GetCurrent().UserCode;
+            logEntity.NickName = OperatorProvider.Provider.GetCurrent().UserName;
+            logEntity.IPAddress = Net.Ip;
+            logEntity.IPAddressName = Net.GetLocation(logEntity.IPAddress);
+            logEntity.Result = result;
+            logEntity.Description = resultLog;
             logEntity.Create();
             service.Insert(logEntity);
         }
         public void WriteDbLog(LogEntity logEntity)
         {
-            logEntity.F_Id = Common.GuId();
-            logEntity.F_Date = DateTime.Now;
-            logEntity.F_IPAddress = "117.81.192.182";
-            logEntity.F_IPAddressName = Net.GetLocation(logEntity.F_IPAddress);
+            logEntity.Id = Common.GuId();
+            logEntity.Date = DateTime.Now;
+            logEntity.IPAddress = "117.81.192.182";
+            logEntity.IPAddressName = Net.GetLocation(logEntity.IPAddress);
             logEntity.Create();
             service.Insert(logEntity);
         }

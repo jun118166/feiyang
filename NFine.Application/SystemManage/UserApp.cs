@@ -23,11 +23,11 @@ namespace NFine.Application.SystemManage
             var expression = ExtLinq.True<UserEntity>();
             if (!string.IsNullOrEmpty(keyword))
             {
-                expression = expression.And(t => t.F_Account.Contains(keyword));
-                expression = expression.Or(t => t.F_RealName.Contains(keyword));
-                expression = expression.Or(t => t.F_MobilePhone.Contains(keyword));
+                expression = expression.And(t => t.Account.Contains(keyword));
+                expression = expression.Or(t => t.RealName.Contains(keyword));
+                expression = expression.Or(t => t.MobilePhone.Contains(keyword));
             }
-            expression = expression.And(t => t.F_Account != "admin");
+            expression = expression.And(t => t.Account != "admin");
             return service.FindList(expression, pagination);
         }
         public UserEntity GetForm(string keyValue)
@@ -56,23 +56,23 @@ namespace NFine.Application.SystemManage
         }
         public UserEntity CheckLogin(string username, string password)
         {
-            UserEntity userEntity = service.FindEntity(t => t.F_Account == username);
+            UserEntity userEntity = service.FindEntity(t => t.Account == username);
             if (userEntity != null)
             {
-                if (userEntity.F_EnabledMark == true)
+                if (userEntity.EnabledMark == true)
                 {
-                    UserLogOnEntity userLogOnEntity = userLogOnApp.GetForm(userEntity.F_Id);
-                    string dbPassword = Md5.md5(DESEncrypt.Encrypt(password.ToLower(), userLogOnEntity.F_UserSecretkey).ToLower(), 32).ToLower();
-                    if (dbPassword == userLogOnEntity.F_UserPassword)
+                    UserLogOnEntity userLogOnEntity = userLogOnApp.GetForm(userEntity.Id);
+                    string dbPassword = Md5.md5(DESEncrypt.Encrypt(password.ToLower(), userLogOnEntity.UserSecretkey).ToLower(), 32).ToLower();
+                    if (dbPassword == userLogOnEntity.UserPassword)
                     {
                         DateTime lastVisitTime = DateTime.Now;
-                        int LogOnCount = (userLogOnEntity.F_LogOnCount).ToInt() + 1;
-                        if (userLogOnEntity.F_LastVisitTime != null)
+                        int LogOnCount = (userLogOnEntity.LogOnCount).ToInt() + 1;
+                        if (userLogOnEntity.LastVisitTime != null)
                         {
-                            userLogOnEntity.F_PreviousVisitTime = userLogOnEntity.F_LastVisitTime.ToDate();
+                            userLogOnEntity.PreviousVisitTime = userLogOnEntity.LastVisitTime.ToDate();
                         }
-                        userLogOnEntity.F_LastVisitTime = lastVisitTime;
-                        userLogOnEntity.F_LogOnCount = LogOnCount;
+                        userLogOnEntity.LastVisitTime = lastVisitTime;
+                        userLogOnEntity.LogOnCount = LogOnCount;
                         userLogOnApp.UpdateForm(userLogOnEntity);
                         return userEntity;
                     }

@@ -155,16 +155,16 @@ function GetLoadNav() {
     var _html = "";
     $.each(data, function (i) {
         var row = data[i];
-        if (row.F_ParentId == "0") {
+        if (row.ParentId == "0") {
             _html += '<li>';
-            _html += '<a data-id="' + row.F_Id + '" href="#" class="dropdown-toggle"><i class="' + row.F_Icon + '"></i><span>' + row.F_FullName + '</span><i class="fa fa-angle-right drop-icon"></i></a>';
+            _html += '<a data-id="' + row.Id + '" href="#" class="dropdown-toggle"><i class="' + row.Icon + '"></i><span>' + row.FullName + '</span><i class="fa fa-angle-right drop-icon"></i></a>';
             var childNodes = row.ChildNodes;
             if (childNodes.length > 0) {
                 _html += '<ul class="submenu">';
                 $.each(childNodes, function (i) {
                     var subrow = childNodes[i];
                     _html += '<li>';
-                    _html += '<a class="menuItem" data-id="' + subrow.F_Id + '" href="' + subrow.F_UrlAddress + '" data-index="' + subrow.F_SortCode + '">' + subrow.F_FullName + '</a>';
+                    _html += '<a class="menuItem" data-id="' + subrow.Id + '" href="' + subrow.UrlAddress + '" data-index="' + subrow.SortCode + '">' + subrow.FullName + '</a>';
                     _html += '</li>';
                 });
                 _html += '</ul>';

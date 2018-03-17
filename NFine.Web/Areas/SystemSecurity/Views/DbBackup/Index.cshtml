@@ -12,12 +12,12 @@
             url: "/SystemSecurity/DbBackup/GetGridJson",
             height: $(window).height() - 96,
             colModel: [
-                { label: "主键", name: "F_Id", hidden: true, key: true },
-                { label: '数据库名', name: 'F_DbName', width: 100, align: 'left' },
-                { label: '备份名称', name: 'F_FileName', width: 200, align: 'left' },
-                { label: '大小', name: 'F_FileSize', width: 100, align: 'left' },
+                { label: "主键", name: "Id", hidden: true, key: true },
+                { label: '数据库名', name: 'DbName', width: 100, align: 'left' },
+                { label: '备份名称', name: 'FileName', width: 200, align: 'left' },
+                { label: '大小', name: 'FileSize', width: 100, align: 'left' },
                 {
-                    label: '备份模式', name: 'F_BackupType', width: 100, align: 'left',
+                    label: '备份模式', name: 'BackupType', width: 100, align: 'left',
                     formatter: function (cellvalue) {
                         if (cellvalue == "1") {
                             return "完整备份";
@@ -27,11 +27,11 @@
                     }
                 },
                 {
-                    label: '备份时间', name: 'F_CreatorTime', width: 100, align: 'left',
+                    label: '备份时间', name: 'CreatorTime', width: 100, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d H:i', newformat: 'Y-m-d H:i' }
                 },
-                { label: '备份人员', name: 'F_CreatorUserId', width: 100, align: 'left' },
-                { label: '备份说明', name: 'F_Description', width: 300, align: 'left' }
+                { label: '备份人员', name: 'CreatorUserId', width: 100, align: 'left' },
+                { label: '备份说明', name: 'Description', width: 300, align: 'left' }
             ]
         });
         $("#txt_condition .dropdown-menu li").click(function () {
@@ -64,14 +64,14 @@
     function btn_delete() {
         $.deleteForm({
             url: "/SystemSecurity/DbBackup/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            param: { keyValue: $("#gridList").jqGridRowValue().Id },
             success: function () {
                 $.currentWindow().$("#gridList").trigger("reloadGrid");
             }
         })
     }
     function btn_download() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.download("/SystemSecurity/DbBackup/DownloadBackup", "keyValue=" + keyValue, 'post');
     }
 </script>

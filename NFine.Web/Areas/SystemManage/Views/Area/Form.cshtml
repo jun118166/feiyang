@@ -19,7 +19,7 @@
         }
     });
     function initControl() {
-        $("#F_ParentId").bindSelect({
+        $("#ParentId").bindSelect({
             url: "/SystemManage/Area/GetTreeSelectJson"
         });
     }
@@ -44,7 +44,7 @@
             <tr>
                 <th class="formTitle">上级</th>
                 <td class="formValue">
-                    <select id="F_ParentId" name="F_ParentId" class="form-control required">
+                    <select id="ParentId" name="ParentId" class="form-control required">
                         <option value="0">父节点</option>
                     </select>
                 </td>
@@ -52,20 +52,20 @@
             <tr>
                 <th class="formTitle">名称</th>
                 <td class="formValue">
-                    <input id="F_FullName" name="F_FullName" type="text" class="form-control required" placeholder="请输入名称" />
+                    <input id="FullName" name="FullName" type="text" class="form-control required" placeholder="请输入名称" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle">排序</th>
                 <td class="formValue">
-                    <input id="F_SortCode" name="F_SortCode" type="text" class="form-control required" />
+                    <input id="SortCode" name="SortCode" type="text" class="form-control required" />
                 </td>
             </tr>
             <tr>
                 <th class="formTitle" style="height: 35px;">选项</th>
                 <td class="formValue" style="padding-top: 1px;">
                     <div class="ckbox">
-                        <input id="F_EnabledMark" name="F_EnabledMark" type="checkbox" checked="checked"><label for="F_EnabledMark">有效</label>
+                        <input id="EnabledMark" name="EnabledMark" type="checkbox" checked="checked"><label for="EnabledMark">有效</label>
                     </div>
                 </td>
             </tr>
@@ -73,7 +73,7 @@
                 <th class="formTitle" valign="top" style="padding-top: 5px;">备注
                 </th>
                 <td class="formValue">
-                    <textarea id="F_Description" name="F_Description" class="form-control" style="height: 60px;"></textarea>
+                    <textarea id="Description" name="Description" class="form-control" style="height: 60px;"></textarea>
                 </td>
             </tr>
         </table>

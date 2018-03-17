@@ -14,7 +14,7 @@ namespace NFine.Mapping.SystemSecurity
         public LogMap()
         {
             this.ToTable("Sys_Log");
-            this.HasKey(t => t.F_Id);
+            this.HasKey(t => t.Id);
         }
     }
 }

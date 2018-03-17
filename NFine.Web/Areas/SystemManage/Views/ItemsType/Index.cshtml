@@ -10,21 +10,21 @@
         $("#gridList").dataGrid({
             treeGrid: true,
             treeGridModel: "adjacency",
-            ExpandColumn: "F_EnCode",
+            ExpandColumn: "EnCode",
             url: "/SystemManage/ItemsType/GetTreeGridJson",
             height: $(window).height() - 90,
             colModel: [
-                { label: "主键", name: "F_Id", hidden: true, key: true },
-                { label: '名称', name: 'F_FullName', width: 200, align: 'left' },
-                { label: '编号', name: 'F_EnCode', width: 150, align: 'left' },
-                { label: '排序', name: 'F_SortCode', width: 80, align: 'center' },
+                { label: "主键", name: "Id", hidden: true, key: true },
+                { label: '名称', name: 'FullName', width: 200, align: 'left' },
+                { label: '编号', name: 'EnCode', width: 150, align: 'left' },
+                { label: '排序', name: 'SortCode', width: 80, align: 'center' },
                 {
-                    label: "有效", name: "F_EnabledMark", width: 60, align: "center",
+                    label: "有效", name: "EnabledMark", width: 60, align: "center",
                     formatter: function (cellvalue) {
                         return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
-                { label: "备注", name: "F_Description", index: "F_Description", width: 200, align: "left" }
+                { label: "备注", name: "Description", index: "Description", width: 200, align: "left" }
             ]
         });
     }
@@ -41,7 +41,7 @@
         });
     }
     function btn_edit() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.modalOpen({
             id: "Form",
             title: "修改分类",
@@ -56,7 +56,7 @@
     function btn_delete() {
         $.deleteForm({
             url: "/SystemManage/ItemsType/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            param: { keyValue: $("#gridList").jqGridRowValue().Id },
             success: function () {
                 $("#gridList").resetSelection();
                 $("#gridList").trigger("reloadGrid");
@@ -64,7 +64,7 @@
         })
     }
     function btn_details() {
-        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var keyValue = $("#gridList").jqGridRowValue().Id;
         $.modalOpen({
             id: "Details",
             title: "查看分类",
