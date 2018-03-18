@@ -13,22 +13,57 @@
             height: $(window).height() - 128,
             colModel: [
                 { label: '主键', name: 'Id', hidden: true },
-                { label: '客户名称', name: 'Name', width: 200, align: 'center' },
-                { label: '客户电话', name: 'Telphone', width: 80, align: 'center' },
-                { label: '业务员', name: 'Salesman', width: 80, align: 'center' },
-                { label: '价格', name: 'Price', width: 80, align: 'center' },
-                { label: '数量', name: 'Quantity', width: 80, align: 'center' },
-                { label: '总价', name: 'Total', width: 80, align: 'center' },
-                { label: '备注', name: 'Remark', width: 200, align: 'center' },
                 {
-                    label: '创建时间', name: 'CreatorTime', width: 80, align: 'center',
-                    formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
-                }
+                     label: '日期', name: 'BillDate', width: 80, align: 'center',
+                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
+                },
+                { label: '客户名称', name: 'CustomerName', width: 180, align: 'center' },
+                { label: '客户电话', name: 'Telphone', width: 80, align: 'center' },
+                { label: '客户地址', name: 'Address', width: 200, align: 'center' },
+                { label: '业务员', name: 'Salesman', width: 80, align: 'center' },
+                { label: '价格', name: 'Price', width: 60, align: 'center' },
+                { label: '数量', name: 'Quantity', width: 60, align: 'center' },
+                { label: '总价', name: 'Total', width: 60, align: 'center' },
+                {
+                    label: '成交状态', name: 'TradStatus', width: 60, align: 'center', formatter: function (cellvalue) {
+                    return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                } },
+                { label: '备注', name: 'Remark', width: 200, align: 'center' },
             ],
             pager: "#gridPager",
             sortname: 'CreatorTime desc',
             viewrecords: true
         });
+    }
+    function btn_delete() {
+        var keyValue = $("#gridList").jqGridRowValue().Id;
+        $.modalConfirm("注：您确定要【删除】该项跟单信息吗？", function (r) {
+            if (r) {
+                $.submitForm({
+                    url: "/CustomerManage/CustomerTransaction/DeleteForm",
+                    param: { keyValue: keyValue },
+                    success: function () {
+                        $.currentWindow().$("#gridList").trigger("reloadGrid");
+                    }
+                })
+            }
+        });
+    }
+    function btn_edit() {
+        var keyValue = $("#gridList").jqGridRowValue().Id;
+        $.modalOpen({
+            id: "Form",
+            title: "编辑跟单信息",
+            url: "/CustomerManage/Customer/Transaction?id=" + keyValue,
+            width: "700px",
+            height: "310px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_excel() {
+
     }
 </script>
 <div class="topPanel">
@@ -36,11 +71,14 @@
         <div class="btn-group">
             <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
         </div>
+        <div class="btn-group">
+            <a id="NF-add" class="btn btn-primary dropdown-text" onclick="btn_excel()"><i class="fa fa-file-excel-o"></i>导出</a>
+        </div>
         <div class="operate">
             <ul class="nav nav-pills">
                 <li class="first">已选中<span>1</span>项</li>
-                <li><a id="NF-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改跟单信息</a></li>
-                <li><a id="NF-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除跟单信息</a></li>
+                <li><a id="NF-edit" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改跟单信息</a></li>
+                <li><a id="NF-delete"  onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除跟单信息</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>
         </div>
@@ -51,7 +89,10 @@
             <tr>
                 <td>
                     <div class="input-group">
-                        <input id="txt_keyword" type="text" class="form-control" placeholder="客户名称/客户电话/客户地址" style="width: 200px;">
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="客户名称/客户电话" style="width: 200px;">
+                        <div class="ckbox" style="margin:5px">
+                            <input id="TradStatus" name="TradStatus" type="checkbox"><label for="TradStatus">成交状态</label>
+                        </div>
                         <span class="input-group-btn">
                             <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
                         </span>

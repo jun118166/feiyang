@@ -14,9 +14,14 @@
                 async: false,
                 success: function (data) {
                     $("#form1").formSerialize(data);
-                }
+               } 
             });
         }
+
+        $('#SalesmanCode').change(function () {
+            var text = $("#SalesmanCode").find("option:selected").text();
+            $('#Salesman').val(text);
+        });
     });
     function initControl() {
         $("#SalesmanCode").bindSelect({
@@ -87,4 +92,5 @@
             </table>
         </div>
     </div>
+    <input type="hidden" name="Salesman" id="Salesman"/>
 </form>

@@ -16,6 +16,12 @@ namespace NFine.Application.CustomerManage
         public List<CustomerTransactionEntity> GetList(Pagination pagination, string keyword)
         {
             var expression = ExtLinq.True<CustomerTransactionEntity>();
+            //非管理员只可查看自己的客户
+            var loginInfo = OperatorProvider.Provider.GetCurrent();
+            if (!"admin".Equals(loginInfo.UserCode))
+            {
+                expression = expression.And(t => t.SalesmanCode.Contains(loginInfo.UserCode));
+            }
             if (!string.IsNullOrEmpty(keyword))
             {
                 expression = expression.And(t => t.CustomerName.Contains(keyword));

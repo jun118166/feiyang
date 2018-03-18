@@ -51,5 +51,12 @@ namespace NFine.Web.Areas.CustomerManage.Controllers
             customerApp.DeleteForm(keyValue);
             return Success("删除成功。");
         }
+
+        [HttpGet]
+        [HandlerAuthorize]
+        public ActionResult Transaction()
+        {
+            return View();
+        }
     }
 }

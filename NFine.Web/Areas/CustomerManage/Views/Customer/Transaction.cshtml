@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Transaction";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = $.request("keyValue");
+    var id = $.request('id');
+    $(function () {
+        initControl();
+
+        if (id) {
+            $.ajax({
+                url: "/CustomerManage/CustomerTransaction/GetFormJson",
+                data: { keyValue: id },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#form1").formSerialize(data);
+                }
+            });
+        }
+
+        $('#Price').change(function () {
+            calcTotal();
+        });
+
+        $('#Quantity').change(function () {
+            calcTotal();
+        });
+    });
+
+    function initControl() {
+        $('#CustomerId').val(keyValue);
+    }
+
+    function calcTotal() {
+        var price = $('#Price').val();
+        var quantity = $('#Quantity').val();
+        if (price && quantity) {
+            $('#Total').val(price * quantity);
+        }
+    }
+
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/CustomerManage/CustomerTransaction/SubmitForm?keyValue=" + id,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form">
+            <tr>
+                <th class="formTitle">日期</th>
+                <td class="formValue">
+                    <input id="BillDate" name="BillDate" type="text" class="form-control required input-wdatepicker" onfocus="WdatePicker()" placeholder="请选择日期" />
+                </td>
+                <th class="formTitle">单价</th>
+                <td class="formValue">
+                    <input id="Price" name="Price" type="number" class="form-control required" placeholder="请输入单价" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">数量</th>
+                <td class="formValue">
+                    <input id="Quantity" name="Quantity" type="number" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  
+    onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\D/g,'')}" class="form-control required" placeholder="请输入数量"/>
+                </td>
+                <th class="formTitle">总额</th>
+                <td class="formValue">
+                    <input id="Total" name="Total" type="number" class="form-control" placeholder="请输入总额"/>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" style="height: 35px;">是否成交</th>
+                <td class="formValue" style="padding-top: 1px;">
+                    <div class="ckbox">
+                        <input id="TradStatus" name="TradStatus" type="checkbox"><label for="TradStatus">成交</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">
+                    备注
+                </th>
+                <td class="formValue" colspan="3">
+                    <textarea id="Remark" name="Remark" class="form-control" style="height: 60px;"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <input type="hidden" id="CustomerId" name="CustomerId" />
+</form>

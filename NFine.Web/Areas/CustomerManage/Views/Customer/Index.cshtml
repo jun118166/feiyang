@@ -62,6 +62,34 @@
             }
         });
     }
+
+    function btn_tran() {
+        var keyValue = $("#gridList").jqGridRowValue().Id;
+        $.modalOpen({
+            id: "Form",
+            title: "新增跟单信息",
+            url: "/CustomerManage/Customer/Transaction?keyValue=" + keyValue,
+            width: "700px",
+            height: "310px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+
+    function btn_edit() {
+        var keyValue = $("#gridList").jqGridRowValue().Id;
+        $.modalOpen({
+            id: "Form",
+            title: "修改客户信息",
+            url: "/CustomerManage/Customer/Form?keyValue=" + keyValue,
+            width: "700px",
+            height: "510px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
 </script>
 <div class="topPanel">
     <div class="toolbar">

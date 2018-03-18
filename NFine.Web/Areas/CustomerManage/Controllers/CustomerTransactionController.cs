@@ -12,6 +12,7 @@ namespace NFine.Web.Areas.CustomerManage.Controllers
     public class CustomerTransactionController : ControllerBase
     {
         private CustomerTransactionApp customerTranApp = new CustomerTransactionApp();
+        private CustomerApp customerApp = new CustomerApp();
 
         [HttpGet]
         [HandlerAjaxOnly]
@@ -39,6 +40,14 @@ namespace NFine.Web.Areas.CustomerManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(CustomerTransactionEntity customerEntity, string keyValue)
         {
+            var loginInfo = OperatorProvider.Provider.GetCurrent();
+
+            CustomerEntity entity = customerApp.GetForm(customerEntity.CustomerId);
+            customerEntity.CustomerName = entity.Name;
+            customerEntity.Telphone = entity.Telphone;
+            customerEntity.Address = entity.Address;
+            customerEntity.Salesman = loginInfo.UserName;
+            customerEntity.SalesmanCode = loginInfo.UserCode;
             customerTranApp.SubmitForm(customerEntity, keyValue);
             return Success("操作成功。");
         }

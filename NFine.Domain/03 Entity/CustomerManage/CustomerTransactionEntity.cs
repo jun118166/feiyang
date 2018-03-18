@@ -18,7 +18,7 @@ namespace NFine.Domain.Entity.CustomerManage
         public DateTime? LastModifyTime { get; set; }
         public string CustomerId { get; set; }
         public string CustomerName { get; set; }
-        public string TradStaus { get; set; }
+        public bool? TradStatus { get; set; }
         public decimal? Price { get; set; }
         public int Quantity { get; set; }
         public string Salesman { get; set; }
@@ -26,5 +26,8 @@ namespace NFine.Domain.Entity.CustomerManage
         public string Remark { get; set; }
         public int Version { get; set; }
         public decimal? Total { get; set; }
+        public DateTime? BillDate { get; set;}
+        public string Telphone { get; set; }
+        public string Address { get; set; }
     }
 }

@@ -622,6 +622,7 @@
     <Content Include="Areas\CustomerManage\Views\Web.config" />
     <Content Include="Areas\CustomerManage\Views\Customer\Form.cshtml" />
     <Content Include="Areas\CustomerManage\Views\CustomerTransaction\Form.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\Customer\Transaction.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

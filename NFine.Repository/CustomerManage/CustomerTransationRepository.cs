@@ -32,6 +32,7 @@ namespace NFine.Repository.CustomerManage
                 {
                     db.Update(customerTranEntity);
                 }
+                db.Commit();
             }
         }
     }
