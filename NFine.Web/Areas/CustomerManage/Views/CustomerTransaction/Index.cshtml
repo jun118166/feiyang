@@ -2,6 +2,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
+<script src="~/Content/js/datepicker/WdatePicker.js"></script>
 <script>
     $(function () {
         gridList();
@@ -34,6 +35,12 @@
             sortname: 'CreatorTime desc',
             viewrecords: true
         });
+
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val(), beginTime: $('#txt_bengintime').val(), endTime: $('#txt_endtime').val(), tranStaus: $('#txt_tradStatus').val() },
+            }).trigger('reloadGrid');
+        });
     }
     function btn_delete() {
         var keyValue = $("#gridList").jqGridRowValue().Id;
@@ -63,7 +70,13 @@
         });
     }
     function btn_excel() {
-
+        $.submitForm({
+            url: "/CustomerManage/CustomerTransaction/Excel",
+            param: { starttime: $('#txt_bengintime').val(), endTime: $('#txt_endtime').val(), status: $('#txt_tradStatus').val() },
+            success: function (data) {
+                window.location.href = "@Url.Action("Download", "CustomerTransaction")";
+            }
+        })
     }
 </script>
 <div class="topPanel">
@@ -89,10 +102,15 @@
             <tr>
                 <td>
                     <div class="input-group">
-                        <input id="txt_keyword" type="text" class="form-control" placeholder="客户名称/客户电话" style="width: 200px;">
-                        <div class="ckbox" style="margin:5px">
-                            <input id="TradStatus" name="TradStatus" type="checkbox"><label for="TradStatus">成交状态</label>
-                        </div>
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="客户名称/客户电话" style="width: 200px;margin-right:15px">
+                        <input id="txt_bengintime" type="text" class="form-control input-wdatepicker" placeholder="开始时间" onfocus="WdatePicker()" style="width: 150px;">
+                        <span style="float:left">——</span>
+                        <input id="txt_endtime" type="text" class="form-control input-wdatepicker" placeholder="结束时间" onfocus="WdatePicker()" style="width: 150px;">
+                        <select id="txt_tradStatus" name="TradStatus" class="form-control" style="width: 100px;margin-left:15px">
+                            <option>--成交状态--</option>
+                            <option value="true">成交</option>
+                            <option value="false">未成交</option>
+                        </select>
                         <span class="input-group-btn">
                             <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
                         </span>

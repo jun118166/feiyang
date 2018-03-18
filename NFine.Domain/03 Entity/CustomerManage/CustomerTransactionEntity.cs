@@ -29,5 +29,6 @@ namespace NFine.Domain.Entity.CustomerManage
         public DateTime? BillDate { get; set;}
         public string Telphone { get; set; }
         public string Address { get; set; }
+        public string Source { get; set; }
     }
 }
