@@ -2,6 +2,8 @@
     ViewBag.Title = "Transaction";
     Layout = "~/Views/Shared/_Form.cshtml";
 }
+<link href="~/Content/js/uploadify/uploadify.css" rel="stylesheet" />
+<script src="~/Content/js/uploadify/jquery.uploadify-3.1.min.js"></script>
 <script>
     var keyValue = $.request("keyValue");
     var id = $.request('id');
@@ -20,14 +22,36 @@
             });
         }
 
-        $('#Price').change(function () {
-            calcTotal();
-        });
+           $("#file_upload").uploadify({
+                //指定swf文件
+                'swf': '@Url.Content("~/Content/js/uploadify/uploadify.swf")',
+                //后台处理的页面
+                'uploader': '/Uploadify/Upload',
+                //按钮显示的文字
+                'buttonText': '上传图片',
+                //选择文件后自动上传
+                'auto': false,
+                //上传完成后执行
+                'onUploadSuccess': function (file, data, response) {
+                    var a = jQuery.parseJSON(data);
+                    if (a.Success) {
+                        $.dialog.alert(a.Message);
+                    }
+                    else {
+                        $.dialog.alert("导入提单成本费用异常：" + a.Message);
+                    }
+                },
+                'onInit': function () { alert("1"); }
+            });
 
-        $('#Quantity').change(function () {
-            calcTotal();
+            //$('#Price').change(function () {
+            //    calcTotal();
+            //});
+
+            //$('#Quantity').change(function () {
+            //    calcTotal();
+            //});
         });
-    });
 
     function initControl() {
         $('#CustomerId').val(keyValue);
@@ -62,12 +86,18 @@
                 <td class="formValue">
                     <input id="BillDate" name="BillDate" type="text" class="form-control required input-wdatepicker" onfocus="WdatePicker()" placeholder="请选择日期" />
                 </td>
-                <th class="formTitle">单价</th>
+                <th class="formTitle" style="height: 35px;">是否成交</th>
+                <td class="formValue" style="padding-top: 1px;">
+                    <div class="ckbox">
+                        <input id="TradStatus" name="TradStatus" type="checkbox"><label for="TradStatus">成交</label>
+                    </div>
+                </td>
+                @*<th class="formTitle">单价</th>
                 <td class="formValue">
                     <input id="Price" name="Price" type="number" class="form-control required" placeholder="请输入单价" />
-                </td>
+                </td>*@
             </tr>
-            <tr>
+            @*<tr>
                 <th class="formTitle">数量</th>
                 <td class="formValue">
                     <input id="Quantity" name="Quantity" type="number" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"  
@@ -84,6 +114,14 @@
                     <div class="ckbox">
                         <input id="TradStatus" name="TradStatus" type="checkbox"><label for="TradStatus">成交</label>
                     </div>
+                </td>
+            </tr>*@
+            <tr>
+                <th class="formTitle" style="height: 35px;">附件上传</th>
+                <td class="formValue">
+                    <div id="fileQueue">
+                    </div>
+                    <input type="file" id="file_upload" name="FileName" />
                 </td>
             </tr>
             <tr>

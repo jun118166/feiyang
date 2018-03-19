@@ -308,6 +308,11 @@
     <Content Include="Content\js\simditor\js\simditor.min.js" />
     <Content Include="Content\js\simditor\js\uploader.js" />
     <Content Include="Content\js\simditor\js\uploader.min.js" />
+    <Content Include="Content\js\uploadify\jquery.uploadify-3.1.js" />
+    <Content Include="Content\js\uploadify\jquery.uploadify-3.1.min.js" />
+    <Content Include="Content\js\uploadify\uploadify-cancel.png" />
+    <Content Include="Content\js\uploadify\uploadify.css" />
+    <Content Include="Content\js\uploadify\uploadify.swf" />
     <Content Include="Content\js\validate\jquery.validate.min.js" />
     <Content Include="Content\js\wdtree\images\icons\add.png" />
     <Content Include="Content\js\wdtree\images\icons\addStep.gif" />
@@ -621,7 +626,6 @@
     <Content Include="Areas\CustomerManage\Views\Customer\Index.cshtml" />
     <Content Include="Areas\CustomerManage\Views\Web.config" />
     <Content Include="Areas\CustomerManage\Views\Customer\Form.cshtml" />
-    <Content Include="Areas\CustomerManage\Views\CustomerTransaction\Form.cshtml" />
     <Content Include="Areas\CustomerManage\Views\Customer\Transaction.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>

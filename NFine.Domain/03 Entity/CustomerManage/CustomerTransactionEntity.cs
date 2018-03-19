@@ -30,5 +30,6 @@ namespace NFine.Domain.Entity.CustomerManage
         public string Telphone { get; set; }
         public string Address { get; set; }
         public string Source { get; set; }
+        public string FileName { get; set; }
     }
 }
