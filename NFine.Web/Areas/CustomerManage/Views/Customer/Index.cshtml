@@ -30,7 +30,7 @@
 
         $("#btn_search").click(function () {
             $gridList.jqGrid('setGridParam', {
-                postData: { keyword: $("#txt_keyword").val() },
+                postData: { keyword: $("#txt_keyword").val(), tranStatus: $('#txt_tradStatus').val() },
             }).trigger('reloadGrid');
         });
     }
@@ -103,7 +103,7 @@
             <ul class="nav nav-pills">
                 <li class="first">已选中<span>1</span>项</li>
                 <li><a id="NF-edit" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改客户信息</a></li>
-                <li><a id="NF-delete" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除客户信息</a></li>
+                @*<li><a id="NF-delete" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除客户信息</a></li>*@
                 <li><a id="NF-tran" onclick="btn_tran()"><i class="fa fa-envelope-o"></i>添加跟单记录</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>
@@ -116,7 +116,12 @@
                 <td>
                     <div class="input-group">
                         <input id="txt_keyword" type="text" class="form-control" placeholder="客户名称/客户电话/客户地址" style="width: 200px;">
-                        <span class="input-group-btn">
+                        <select id="txt_tradStatus" name="TradStatus" class="form-control" style="width: 100px;margin-left:15px">
+                            <option>--跟进状态--</option>
+                            <option value="true">已跟进</option>
+                            <option value="false">未跟进</option>
+                        </select>
+                         <span class="input-group-btn">
                             <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
                         </span>
                     </div>

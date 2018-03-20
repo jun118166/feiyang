@@ -15,11 +15,11 @@ namespace NFine.Web.Areas.CustomerManage.Controllers
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(Pagination pagination, string keyword)
+        public ActionResult GetGridJson(Pagination pagination, string keyword,bool? tranStatus)
         {
             var data = new
             {
-                rows = customerApp.GetList(pagination, keyword),
+                rows = customerApp.GetList(pagination, keyword,tranStatus),
                 total = pagination.total,
                 page = pagination.page,
                 records = pagination.records

@@ -13,9 +13,20 @@ namespace NFine.Application.CustomerManage
     public class CustomerApp
     {
         private ICustomerRepository service = new CustomerRepository();
+        private ICustomerTransactionRepository tranService = new CustomerTransationRepository();
 
-        public List<CustomerEntity> GetList(Pagination pagination, string keyword)
+        public List<CustomerEntity> GetList(Pagination pagination, string keyword, bool? tranStatus)
         {
+            var lst = tranService.FindList("select * from Buz_CustomerTransaction");
+            string customerids = string.Empty;
+            foreach (var item in lst)
+            {
+                if (!customerids.Contains(item.CustomerId))
+                {
+                    customerids += item.CustomerId + ",";
+                }
+            }
+
             var expression = ExtLinq.True<CustomerEntity>();
             //非管理员只可查看自己的客户
             var loginInfo = OperatorProvider.Provider.GetCurrent();
@@ -28,6 +39,17 @@ namespace NFine.Application.CustomerManage
                 expression = expression.And(t => t.Name.Contains(keyword));
                 expression = expression.Or(t => t.Telphone.Contains(keyword));
                 expression = expression.Or(t => t.Address.Contains(keyword));
+            }
+            if (tranStatus != null)
+            {
+                if (tranStatus == true)
+                {
+                    expression = expression.And(t => customerids.Contains(t.Id));
+                }
+                else
+                {
+                    expression = expression.And(t => !customerids.Contains(t.Id));
+                }
             }
             return service.FindList(expression, pagination);
         }
@@ -43,13 +65,23 @@ namespace NFine.Application.CustomerManage
         {
             if (!string.IsNullOrEmpty(keyValue))
             {
+                //更新业务员跟单记录信息
+                var lst = tranService.IQueryable().Where(t => t.CustomerId.Equals(keyValue));
+                foreach (var item in lst)
+                {
+                    item.SalesmanCode = customerEntity.SalesmanCode;
+                    item.Salesman = customerEntity.Salesman;
+                    item.Modify(item.Id);
+                    tranService.SubmitForm(item, item.Id);
+                }
+
                 customerEntity.Modify(keyValue);
             }
             else
             {
                 //先根据客户名称
                 var expression = ExtLinq.True<CustomerEntity>();
-                expression = expression.And(t => t.Name.Contains(customerEntity.Name));
+                expression = expression.And(t => t.Name.Contains(customerEntity.Name.Trim()));
                 expression = expression.And(t => t.Telphone.Contains(customerEntity.Telphone));
                 var lst = service.IQueryable(expression);
                 if (lst != null & lst.Count() > 0)

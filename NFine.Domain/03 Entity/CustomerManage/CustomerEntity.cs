@@ -20,6 +20,8 @@ namespace NFine.Domain.Entity.CustomerManage
         public string SourceCode { get; set; }
         public string SourceName { get; set; }
         public string Telphone { set; get; }
+        public string MobilePhone { get; set; }
+        public string Email { get; set; }
         public string Remark { set; get; }
         public string Version { get; set; }
         public string Salesman { get; set; }
