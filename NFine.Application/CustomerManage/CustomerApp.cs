@@ -81,7 +81,7 @@ namespace NFine.Application.CustomerManage
             {
                 //先根据客户名称
                 var expression = ExtLinq.True<CustomerEntity>();
-                expression = expression.And(t => t.Name.Contains(customerEntity.Name.Trim()));
+                expression = expression.And(t => t.Company.Contains(customerEntity.Company.Trim()));
                 expression = expression.And(t => t.Telphone.Contains(customerEntity.Telphone));
                 var lst = service.IQueryable(expression);
                 if (lst != null & lst.Count() > 0)

@@ -27,5 +27,6 @@ namespace NFine.Domain.Entity.CustomerManage
         public string Salesman { get; set; }
         public string SalesmanCode { get; set; }
         public string Address { get; set; }
+        public string Company { get; set; }
     }
 }
